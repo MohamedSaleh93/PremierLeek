@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">PremierLeek</string>
+    <string name="app_name">Premier Leek</string>
     <string name="library_api_token">6ccf3ca8ecfd41cca9ca404adbf978f1</string>
     <string name="fixtures">Fixtures</string>
     <string name="favorites">Favorites</string>
+    <string name="no_favorites">You have no favorites saved</string>
 </resources>

@@ -10,11 +10,11 @@ import com.premier.leek.R;
 import com.premier.leek.fragment.FavoritesFragment;
 import com.premier.leek.fragment.FixturesFragment;
 
-public class FixturesPageAdapter extends FragmentPagerAdapter {
+public class MainPageAdapter extends FragmentPagerAdapter {
 
     private Context context;
 
-    public FixturesPageAdapter(FragmentManager fm, Context context) {
+    public MainPageAdapter(FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
     }
