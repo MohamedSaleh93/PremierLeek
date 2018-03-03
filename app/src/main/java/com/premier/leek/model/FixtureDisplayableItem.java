@@ -11,6 +11,7 @@ public class FixtureDisplayableItem {
     private boolean isAddedToFavorites;
     private String fixturesDateHeader;
     private boolean isDateHeader = false;
+    private String fixtureId;
 
     public String getHomeTeamName() {
         return homeTeamName;
@@ -82,5 +83,13 @@ public class FixtureDisplayableItem {
 
     public void setDateHeader(boolean dateHeader) {
         isDateHeader = dateHeader;
+    }
+
+    public String getFixtureId() {
+        return fixtureId;
+    }
+
+    public void setFixtureId(String fixtureId) {
+        this.fixtureId = fixtureId;
     }
 }

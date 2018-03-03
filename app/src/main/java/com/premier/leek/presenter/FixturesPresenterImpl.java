@@ -10,6 +10,7 @@ import com.premier.leek.model.FixtureDisplayableItem;
 import com.premier.leek.model.FootballDataResponseModel;
 import com.premier.leek.network.FixturesProvider;
 import com.premier.leek.network.PremierLeagueFixturesProvider;
+import com.premier.leek.sharedpref.SharedPreferenceManager;
 import com.premier.leek.util.DateFormatterFactory;
 
 import java.util.ArrayList;
@@ -50,11 +51,10 @@ public class FixturesPresenterImpl implements FixturesPresenter{
     private FixtureDisplayableItem buildFixtureDisplayableItem(Fixture currentFixture) {
         FixtureDisplayableItem displayableItem = new FixtureDisplayableItem();
         displayableItem.setHomeTeamName(currentFixture.getHomeTeamName());
-//        displayableItem.setHomeTeamIconUrl(fixturesProvider.
-//                getTeamImageIcon(currentFixture.getLinks().getHomeTeam().getHref()));
         displayableItem.setAwayTeamName(currentFixture.getAwayTeamName());
-//        displayableItem.setAwayTeamIconUrl(fixturesProvider.
-//                getTeamImageIcon(currentFixture.getLinks().getAwayTeam().getHref()));
+        displayableItem.setFixtureId(currentFixture.getLinks().geFixtureIdLink().getHref());
+        displayableItem.setAddedToFavorites(SharedPreferenceManager.getInstance().
+                getBoolean(currentFixture.getLinks().geFixtureIdLink().getHref(), false));
         if (currentFixture.getStatus().equals("SCHEDULED") || currentFixture.getStatus().equals("TIMED") ||
                 currentFixture.getStatus().equals("POSTPONED")) {
             displayableItem.setFixtureStatusBackgroundColor(ContextCompat.getColor(context, R.color.gray));

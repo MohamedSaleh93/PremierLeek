@@ -1,4 +1,4 @@
-package com.premier.leek;
+package com.premier.leek.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.premier.leek.R;
 import com.premier.leek.adapter.MainPageAdapter;
 import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.fragment.FavoritesFragment;

@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.premier.leek.MainActivity;
 import com.premier.leek.R;
 import com.premier.leek.adapter.FavoritesListAdapter;
 import com.premier.leek.model.FixtureDisplayableItem;

@@ -15,14 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.premier.leek.MainActivity;
 import com.premier.leek.R;
 import com.premier.leek.adapter.FixturesListAdapter;
 import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.model.FixtureDisplayableItem;
 import com.premier.leek.presenter.FixturesPresenter;
 import com.premier.leek.presenter.FixturesPresenterImpl;
-import com.premier.leek.util.Statics;
 import com.premier.leek.util.Utilities;
 
 import java.util.List;

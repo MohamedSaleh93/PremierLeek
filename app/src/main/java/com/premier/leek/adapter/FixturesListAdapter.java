@@ -16,6 +16,7 @@ import com.like.OnLikeListener;
 import com.premier.leek.R;
 import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.model.FixtureDisplayableItem;
+import com.premier.leek.sharedpref.SharedPreferenceManager;
 import com.premier.leek.util.Statics;
 import com.squareup.picasso.Picasso;
 
@@ -59,14 +60,19 @@ public class FixturesListAdapter extends RecyclerView.Adapter<FixturesListAdapte
             holder.addToFavoritesButton.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
+                    SharedPreferenceManager.getInstance().putBoolean(currentFixture.getFixtureId(), true);
                     likeButtonClickListener.onLikeButtonClicked(currentFixture);
                 }
 
                 @Override
                 public void unLiked(LikeButton likeButton) {
+                    SharedPreferenceManager.getInstance().putBoolean(currentFixture.getFixtureId(), false);
                     likeButtonClickListener.onDislikeButtonClicked(currentFixture);
                 }
             });
+            if (currentFixture.isAddedToFavorites()) {
+                likeButtonClickListener.onLikeButtonClicked(currentFixture);
+            }
         }
     }
 
