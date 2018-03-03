@@ -6,8 +6,19 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fixturesDateHeader"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+
     <com.like.LikeButton
-        android:id="@+id/addFixtureToFavorite"
+        android:id="@+id/addFixtureToFavoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon_size="25dp"

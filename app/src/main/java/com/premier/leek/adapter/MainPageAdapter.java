@@ -13,27 +13,29 @@ import com.premier.leek.fragment.FixturesFragment;
 public class MainPageAdapter extends FragmentPagerAdapter {
 
     private Context context;
+    private Fragment tabsFragments[];
 
-    public MainPageAdapter(FragmentManager fm, Context context) {
+    public MainPageAdapter(Context context, FragmentManager fm,  Fragment tabsFragments[]) {
         super(fm);
         this.context = context;
+        this.tabsFragments = tabsFragments;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new FixturesFragment();
+                return tabsFragments[0];
             case 1:
-                return new FavoritesFragment();
+                return tabsFragments[1];
             default:
-                return new FixturesFragment();
+                return tabsFragments[0];
         }
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return tabsFragments.length;
     }
 
     @Nullable

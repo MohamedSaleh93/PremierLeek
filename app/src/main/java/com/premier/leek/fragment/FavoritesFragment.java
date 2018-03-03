@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.premier.leek.MainActivity;
 import com.premier.leek.R;
 
 public class FavoritesFragment extends Fragment{
@@ -22,5 +24,13 @@ public class FavoritesFragment extends Fragment{
         noFavoritesText.setVisibility(View.VISIBLE);
         favoritesRecyclerView.setVisibility(View.GONE);
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Toast.makeText(getContext(), "Size is : " + ((MainActivity)getActivity()).fixtureDisplayableItems.size(), Toast.LENGTH_LONG).show();
+        }
     }
 }
