@@ -22,17 +22,19 @@ import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.model.FixtureDisplayableItem;
 import com.premier.leek.presenter.FixturesPresenter;
 import com.premier.leek.presenter.FixturesPresenterImpl;
+import com.premier.leek.util.Statics;
 import com.premier.leek.util.Utilities;
 
 import java.util.List;
 
-public class FixturesFragment extends Fragment implements LikeButtonClickListener{
+public class FixturesFragment extends Fragment implements LikeButtonClickListener {
 
     private RecyclerView fixturesView;
     private ProgressBar loadingFixturesProgressBar;
     private TextView noFixturesDisclaimer;
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<FixtureDisplayableItem> fixtureDisplayableItems;
+    private LikeButtonClickListener likeButtonClickListener;
 
     @Nullable
     @Override
@@ -42,14 +44,30 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshFixturesLayout);
         fixturesView = (RecyclerView) view.findViewById(R.id.fixturesRecyclerView);
         noFixturesDisclaimer = (TextView) view.findViewById(R.id.noFixturesDisclaimer);
+        loadFixturesAndRenderIt();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadFixturesAndRenderIt();
+            }
+        });
+        return view;
+    }
+
+    public void registerLikeButtonListener(LikeButtonClickListener likeButtonClickListener) {
+        this.likeButtonClickListener = likeButtonClickListener;
+    }
+
+    private void loadFixturesAndRenderIt() {
         if (Utilities.checkForInternetConnection(getContext())) {
             new LoadFixturesAsyncTask().execute();
         } else {
+            swipeRefreshLayout.setRefreshing(false);
+            fixturesView.setVisibility(View.GONE);
             loadingFixturesProgressBar.setVisibility(View.GONE);
             noFixturesDisclaimer.setVisibility(View.VISIBLE);
             noFixturesDisclaimer.setText(R.string.no_internet_connection);
         }
-        return view;
     }
 
     private class LoadFixturesAsyncTask extends AsyncTask<Void, Void, List<FixtureDisplayableItem>> {
@@ -64,6 +82,7 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
         @Override
         protected void onPostExecute(List<FixtureDisplayableItem> fixturesList) {
             super.onPostExecute(fixturesList);
+            swipeRefreshLayout.setRefreshing(false);
             FixturesListAdapter fixturesListAdapter = new FixturesListAdapter(getContext(), fixturesList, FixturesFragment.this);
             fixturesView.setAdapter(fixturesListAdapter);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -74,9 +93,10 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
             fixturesView.addItemDecoration(dividerItemDecoration);
             loadingFixturesProgressBar.setVisibility(View.GONE);
             if (fixturesList.size() > 0) {
-                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                fixturesView.setVisibility(View.VISIBLE);
                 noFixturesDisclaimer.setVisibility(View.GONE);
             } else {
+                fixturesView.setVisibility(View.GONE);
                 noFixturesDisclaimer.setVisibility(View.VISIBLE);
                 noFixturesDisclaimer.setText(R.string.no_fixtures);
             }
@@ -84,12 +104,14 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
     }
 
     @Override
-    public void onLikeButtonClicked(int itemPosition) {
-        ((MainActivity)getActivity()).fixtureDisplayableItems.add(fixtureDisplayableItems.get(itemPosition));
+    public void onLikeButtonClicked(FixtureDisplayableItem displayableItem) {
+        if (likeButtonClickListener != null)
+            likeButtonClickListener.onLikeButtonClicked(displayableItem);
     }
 
     @Override
-    public void onDislikeButtonClicked(int itemPosition) {
-        ((MainActivity)getActivity()).fixtureDisplayableItems.remove(fixtureDisplayableItems.get(itemPosition));
+    public void onDislikeButtonClicked(FixtureDisplayableItem displayableItem) {
+        if (likeButtonClickListener != null)
+            likeButtonClickListener.onDislikeButtonClicked(displayableItem);
     }
 }

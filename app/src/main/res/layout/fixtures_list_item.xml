@@ -17,13 +17,14 @@
         android:paddingTop="10dp"
         android:paddingBottom="10dp" />
 
+    <include
+        android:id="@+id/fixtureResultView"
+        layout="@layout/fixture_item_view"/>
+
     <com.like.LikeButton
         android:id="@+id/addFixtureToFavoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon_size="25dp"
-        app:icon_type="heart" />
-    <include
-        android:id="@+id/fixtureResultView"
-        layout="@layout/fixture_item_view"/>
+        app:icon_type="Star" />
 </LinearLayout>

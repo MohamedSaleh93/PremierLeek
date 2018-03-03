@@ -8,4 +8,5 @@ public class Statics {
 
     public static final String FOOT_BALL_DATA_API_TOKEN = "6ccf3ca8ecfd41cca9ca404adbf978f1";
     public static final String LOG_TAG = "premierLeek";
+    public static final String LIKE_BUTTON_LISTENER_KEY = "likeButtonListener";
 }

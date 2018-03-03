@@ -7,17 +7,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.premier.leek.adapter.MainPageAdapter;
+import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.fragment.FavoritesFragment;
 import com.premier.leek.fragment.FixturesFragment;
 import com.premier.leek.model.FixtureDisplayableItem;
+import com.premier.leek.util.Statics;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LikeButtonClickListener{
 
     public List<FixtureDisplayableItem> fixtureDisplayableItems;
-
+    FavoritesFragment favoritesFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,9 +27,22 @@ public class MainActivity extends AppCompatActivity {
         fixtureDisplayableItems = new ArrayList<>();
         ViewPager pagesViewPager = (ViewPager) findViewById(R.id.pagesViewPager);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        Fragment tabsFragments[] = new Fragment[] {new FixturesFragment(), new FavoritesFragment()};
+        favoritesFragment = new FavoritesFragment();
+        FixturesFragment fixturesFragment = new FixturesFragment();
+        fixturesFragment.registerLikeButtonListener(this);
+        Fragment tabsFragments[] = new Fragment[] {fixturesFragment, favoritesFragment};
         MainPageAdapter mainPageAdapter = new MainPageAdapter(this, getSupportFragmentManager(), tabsFragments);
         pagesViewPager.setAdapter(mainPageAdapter);
         tabLayout.setupWithViewPager(pagesViewPager);
+    }
+
+    @Override
+    public void onLikeButtonClicked(FixtureDisplayableItem displayableItem) {
+        favoritesFragment.addFavoriteFixture(displayableItem);
+    }
+
+    @Override
+    public void onDislikeButtonClicked(FixtureDisplayableItem displayableItem) {
+        favoritesFragment.removeFavoriteFixture(displayableItem);
     }
 }

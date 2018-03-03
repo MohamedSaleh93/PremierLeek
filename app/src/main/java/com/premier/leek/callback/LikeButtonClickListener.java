@@ -1,7 +1,11 @@
 package com.premier.leek.callback;
 
-public interface LikeButtonClickListener {
+import com.premier.leek.model.FixtureDisplayableItem;
 
-    void onLikeButtonClicked(int itemPosition);
-    void onDislikeButtonClicked(int itemPosition);
+import java.io.Serializable;
+
+public interface LikeButtonClickListener extends Serializable{
+
+    void onLikeButtonClicked(FixtureDisplayableItem displayableItem);
+    void onDislikeButtonClicked(FixtureDisplayableItem displayableItem);
 }

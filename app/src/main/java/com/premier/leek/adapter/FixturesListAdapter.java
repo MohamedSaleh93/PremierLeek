@@ -43,7 +43,7 @@ public class FixturesListAdapter extends RecyclerView.Adapter<FixturesListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull FixturesListAdapter.FixturesViewHolder holder, final int position) {
-        FixtureDisplayableItem currentFixture = fixtureDisplayableItems.get(position);
+        final FixtureDisplayableItem currentFixture = fixtureDisplayableItems.get(position);
         if (currentFixture.isDateHeader()) {
             holder.fixturesDateHeader.setVisibility(View.VISIBLE);
             holder.fixturesResultView.setVisibility(View.GONE);
@@ -59,12 +59,12 @@ public class FixturesListAdapter extends RecyclerView.Adapter<FixturesListAdapte
             holder.addToFavoritesButton.setOnLikeListener(new OnLikeListener() {
                 @Override
                 public void liked(LikeButton likeButton) {
-                    likeButtonClickListener.onLikeButtonClicked(position);
+                    likeButtonClickListener.onLikeButtonClicked(currentFixture);
                 }
 
                 @Override
                 public void unLiked(LikeButton likeButton) {
-                    likeButtonClickListener.onDislikeButtonClicked(position);
+                    likeButtonClickListener.onDislikeButtonClicked(currentFixture);
                 }
             });
         }
