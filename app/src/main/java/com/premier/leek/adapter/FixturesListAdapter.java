@@ -18,7 +18,6 @@ import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.model.FixtureDisplayableItem;
 import com.premier.leek.sharedpref.SharedPreferenceManager;
 import com.premier.leek.util.Statics;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
