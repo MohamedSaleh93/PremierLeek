@@ -34,21 +34,4 @@ public class PremierLeagueFixturesProvider implements FixturesProvider{
         }
         return dataResult;
     }
-
-    @Override
-    public String getTeamImageIcon(String teamUrl) {
-        try {
-            ApiInterface apiInterface = ApiClient.getClient(teamUrl + "/").create(ApiInterface.class);
-            Call<TeamsModel> teamsCall = apiInterface.getPremierLeagueTeamIcon(teamUrl);
-            Response<TeamsModel> callResponse = teamsCall.execute();
-            if (callResponse.isSuccessful()) {
-                return callResponse.body().getIconUrl();
-            } else {
-                Log.e(Statics.LOG_TAG, "Failed to load fixtures : " + callResponse.errorBody().string());
-            }
-        } catch (IOException ioException) {
-            Log.e(Statics.LOG_TAG, "Exception in loading teamUrl" + teamUrl + " : " + ioException.getMessage());
-        }
-        return null;
-    }
 }

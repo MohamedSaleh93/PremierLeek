@@ -7,6 +7,4 @@ import java.util.List;
 public interface FixturesProvider {
 
     FootballDataResponseModel loadNextFixtures();
-
-    String getTeamImageIcon(String teamUrl);
 }
