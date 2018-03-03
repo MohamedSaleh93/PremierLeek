@@ -69,4 +69,8 @@ public class FavoritesFragment extends Fragment{
     public void removeFavoriteFixture(FixtureDisplayableItem favoriteFixture) {
         fixtureDisplayableItems.remove(favoriteFixture);
     }
+
+    public void removeAllFavoriteFixtures() {
+        fixtureDisplayableItems.clear();
+    }
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.premier.leek.R;
 import com.premier.leek.adapter.FixturesListAdapter;
+import com.premier.leek.callback.FixturesListRefreshedListener;
 import com.premier.leek.callback.LikeButtonClickListener;
 import com.premier.leek.model.FixtureDisplayableItem;
 import com.premier.leek.presenter.FixturesPresenter;
@@ -33,6 +34,7 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<FixtureDisplayableItem> fixtureDisplayableItems;
     private LikeButtonClickListener likeButtonClickListener;
+    private FixturesListRefreshedListener fixturesListRefreshedListener;
 
     @Nullable
     @Override
@@ -46,6 +48,9 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                if (fixturesListRefreshedListener != null) {
+                    fixturesListRefreshedListener.onFixturesListRefreshed();
+                }
                 loadFixturesAndRenderIt();
             }
         });
@@ -54,6 +59,10 @@ public class FixturesFragment extends Fragment implements LikeButtonClickListene
 
     public void registerLikeButtonListener(LikeButtonClickListener likeButtonClickListener) {
         this.likeButtonClickListener = likeButtonClickListener;
+    }
+
+    public void registerFixtureListRefreshListener(FixturesListRefreshedListener fixturesListRefreshedListener) {
+        this.fixturesListRefreshedListener = fixturesListRefreshedListener;
     }
 
     private void loadFixturesAndRenderIt() {
